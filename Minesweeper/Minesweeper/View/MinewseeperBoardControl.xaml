@@ -70,15 +70,14 @@
   </UserControl.Resources>
 
 
-
   <Border BorderBrush="White" BorderThickness="0,0,5,5">
-    <Border BorderBrush="Gray" BorderThickness="5,5,0,0">
+    <Border BorderBrush="White" BorderThickness="5,5,0,0">
       <ListView
         Name="OuterListView"
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
-        BorderBrush="White"
-        BorderThickness="0,0,5,5"
+        BorderBrush="Gray"
+        BorderThickness="5,5,0,0"
         ItemContainerStyle="{StaticResource NoItemHighlight}"
         ItemsSource="{Binding Board}"
         Style="{StaticResource ListViewStyle}">
