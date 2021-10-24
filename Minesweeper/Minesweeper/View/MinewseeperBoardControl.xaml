@@ -69,60 +69,86 @@
     </ResourceDictionary>
   </UserControl.Resources>
 
-
-  <Border BorderBrush="White" BorderThickness="0,0,5,5">
-    <Border BorderBrush="White" BorderThickness="5,5,0,0">
-      <ListView
-        Name="OuterListView"
-        HorizontalAlignment="Center"
-        VerticalAlignment="Center"
-        BorderBrush="Gray"
-        BorderThickness="5,5,0,0"
-        ItemContainerStyle="{StaticResource NoItemHighlight}"
-        ItemsSource="{Binding Board}"
-        Style="{StaticResource ListViewStyle}">
-
-        <ListView.ItemsPanel>
-          <ItemsPanelTemplate>
-            <StackPanel Orientation="Vertical" />
-          </ItemsPanelTemplate>
-        </ListView.ItemsPanel>
-
-        <ListView.ItemTemplate>
-          <DataTemplate>
-            <ListView
-              Name="InnerListView"
-              HorizontalAlignment="Stretch"
-              VerticalAlignment="Stretch"
-              BorderThickness="0"
-              Cursor="Hand"
-              ItemContainerStyle="{StaticResource NoItemHighlight}"
-              ItemsSource="{Binding}"
-              SelectedItem="{Binding SelectedSquare}"
-              Style="{StaticResource ListViewStyle}">
-              <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                  <VirtualizingStackPanel Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-              </ListView.ItemsPanel>
-              <ListView.ItemTemplate>
-                <DataTemplate>
-                  <Button
-                    Background="Transparent"
-                    BorderThickness="0"
-                    Command="{Binding SquareClickedCommand}"
-                    Style="{StaticResource NoButtonHighlight}">
-                    <Image
-                      Width="{Binding Square.Size}"
-                      Height="{Binding Square.Size}"
-                      Source="{Binding Square.Source}" />
-                  </Button>
-                </DataTemplate>
-              </ListView.ItemTemplate>
-            </ListView>
-          </DataTemplate>
-        </ListView.ItemTemplate>
-      </ListView>
+  <StackPanel Margin="22">
+    <Border
+      Margin="0,5"
+      HorizontalAlignment="Stretch"
+      VerticalAlignment="Bottom"
+      BorderBrush="Gray"
+      BorderThickness="5,5,0,0">
+      <Border BorderBrush="White" BorderThickness="0,0,5,5">
+        <Button
+          Command="{Binding NewGameCommand}"
+          Cursor="Hand"
+          Style="{StaticResource NoButtonHighlight}">
+          <Image
+            Width="25"
+            Height="25"
+            Source="{Binding SmileyImageSource}" />
+        </Button>
+      </Border>
     </Border>
-  </Border>
+    <Border BorderBrush="White" BorderThickness="0,0,5,5">
+      <Border
+        Background="Gray"
+        BorderBrush="Gray"
+        BorderThickness="0,5,0,0">
+        <ListView
+          Name="OuterListView"
+          Margin="0,-5,0,0"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          BorderBrush="Gray"
+          BorderThickness="5,5,0,0"
+          ItemContainerStyle="{StaticResource NoItemHighlight}"
+          ItemsSource="{Binding Board}"
+          Style="{StaticResource ListViewStyle}">
+
+          <ListView.ItemsPanel>
+            <ItemsPanelTemplate>
+              <StackPanel Orientation="Vertical" />
+            </ItemsPanelTemplate>
+          </ListView.ItemsPanel>
+
+          <ListView.ItemTemplate>
+            <DataTemplate>
+              <ListView
+                Name="InnerListView"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                BorderThickness="0"
+                Cursor="Hand"
+                ItemContainerStyle="{StaticResource NoItemHighlight}"
+                ItemsSource="{Binding}"
+                SelectedItem="{Binding SelectedSquare}"
+                Style="{StaticResource ListViewStyle}">
+                <ListView.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Horizontal" />
+                  </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                  <DataTemplate>
+                    <Button
+                      Background="Transparent"
+                      BorderThickness="0"
+                      Command="{Binding SquareClickedCommand}"
+                      Style="{StaticResource NoButtonHighlight}">
+                      <Button.InputBindings>
+                        <MouseBinding Command="{Binding SquareRightClickedCommand}" Gesture="RightClick" />
+                      </Button.InputBindings>
+                      <Image
+                        Width="{Binding Square.Size}"
+                        Height="{Binding Square.Size}"
+                        Source="{Binding Square.DisplayedImage}" />
+                    </Button>
+                  </DataTemplate>
+                </ListView.ItemTemplate>
+              </ListView>
+            </DataTemplate>
+          </ListView.ItemTemplate>
+        </ListView>
+      </Border>
+    </Border>
+  </StackPanel>
 </UserControl>

@@ -6,9 +6,10 @@
   xmlns:local="clr-namespace:Minesweeper"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:view="clr-namespace:Minesweeper.View"
-  Title="MainWindow"
+  Title="Minesweeper"
   Width="300"
   Height="400"
+  WindowStartupLocation="CenterScreen"
   mc:Ignorable="d">
   <Grid>
     <view:MinewseeperBoardControl x:Name="MinewseeperBoardControl" />

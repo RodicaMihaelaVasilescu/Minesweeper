@@ -67,6 +67,7 @@
     </ApplicationDefinition>
     <Compile Include="Model\BindableBase.cs" />
     <Compile Include="Model\Square.cs" />
+    <Compile Include="Model\SquareImageConstants.cs" />
     <Compile Include="ViewModel\MinewseeperBoardViewModel.cs" />
     <Compile Include="ViewModel\SquareViewModel.cs" />
     <Compile Include="View\MinewseeperBoardControl.xaml.cs">
@@ -120,7 +121,25 @@
     <Resource Include="Resources\square.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\empty_square.png" />
+    <Resource Include="Resources\square0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\square1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\bomb.png" />
+    <Resource Include="Resources\red_bomb.png" />
+    <Resource Include="Resources\square2.png" />
+    <Resource Include="Resources\square3.png" />
+    <Resource Include="Resources\square4.png" />
+    <Resource Include="Resources\square5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\flag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\game_over_smiley.png" />
+    <Resource Include="Resources\smiley.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
