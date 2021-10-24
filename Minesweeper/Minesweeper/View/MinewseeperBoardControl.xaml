@@ -1,0 +1,129 @@
+﻿<UserControl
+  x:Class="Minesweeper.View.MinewseeperBoardControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:Minesweeper.View"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  Background="LightGray"
+  mc:Ignorable="d">
+
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <Style x:Key="NoItemHighlight" TargetType="{x:Type ListViewItem}">
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type ListViewItem}">
+              <ContentPresenter />
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+
+      <Style x:Key="NoButtonHighlight" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type Button}">
+              <ContentPresenter />
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+
+      <Style x:Key="ListViewStyle" TargetType="{x:Type ListView}">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+        <!--<Setter Property="BorderBrush" Value="{StaticResource ListBorder}" />-->
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type ListView}">
+              <Border
+                Name="Bd"
+                Padding="0"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                SnapsToDevicePixels="true">
+                <!--  Original value was 1  -->
+                <ScrollViewer Padding="{TemplateBinding Padding}" Focusable="false">
+                  <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                </ScrollViewer>
+              </Border>
+              <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="false">
+                  <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                </Trigger>
+                <Trigger Property="IsGrouping" Value="true">
+                  <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+                </Trigger>
+              </ControlTemplate.Triggers>
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+    </ResourceDictionary>
+  </UserControl.Resources>
+
+
+
+  <Border BorderBrush="White" BorderThickness="0,0,5,5">
+    <Border BorderBrush="Gray" BorderThickness="5,5,0,0">
+      <ListView
+        Name="OuterListView"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        BorderBrush="White"
+        BorderThickness="0,0,5,5"
+        ItemContainerStyle="{StaticResource NoItemHighlight}"
+        ItemsSource="{Binding Board}"
+        Style="{StaticResource ListViewStyle}">
+
+        <ListView.ItemsPanel>
+          <ItemsPanelTemplate>
+            <StackPanel Orientation="Vertical" />
+          </ItemsPanelTemplate>
+        </ListView.ItemsPanel>
+
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ListView
+              Name="InnerListView"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"
+              BorderThickness="0"
+              Cursor="Hand"
+              ItemContainerStyle="{StaticResource NoItemHighlight}"
+              ItemsSource="{Binding}"
+              SelectedItem="{Binding SelectedSquare}"
+              Style="{StaticResource ListViewStyle}">
+              <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <VirtualizingStackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+              </ListView.ItemsPanel>
+              <ListView.ItemTemplate>
+                <DataTemplate>
+                  <Button
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Command="{Binding SquareClickedCommand}"
+                    Style="{StaticResource NoButtonHighlight}">
+                    <Image
+                      Width="{Binding Square.Size}"
+                      Height="{Binding Square.Size}"
+                      Source="{Binding Square.Source}" />
+                  </Button>
+                </DataTemplate>
+              </ListView.ItemTemplate>
+            </ListView>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+    </Border>
+  </Border>
+</UserControl>
